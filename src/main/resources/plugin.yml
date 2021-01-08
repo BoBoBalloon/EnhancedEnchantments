@@ -1,0 +1,12 @@
+name: EnhancedEnchantments
+version: ${project.version}
+main: me.boboballoon.enhancedenchantments.EnhancedEnchantments
+api-version: 1.16
+
+commands:
+  getenchantment:
+    description: get an enchanted book
+
+permissions:
+  enhancedenchantments.getenchantment:
+    default: op
