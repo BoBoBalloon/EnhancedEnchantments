@@ -39,6 +39,7 @@ public class EnchantmentHolder implements Serializable {
     /**
      * Returns the specified enchantment inside the holder
      *
+     * @param enchantment the enchantment you wish to get
      * @return the specified enchantment inside the holder, null if not present
      */
     public ActiveEnchantment getEnchantment(Enchantment enchantment) {
@@ -69,6 +70,7 @@ public class EnchantmentHolder implements Serializable {
      * Removes an enchantment from the holder
      *
      * @param enchantment the enchantment you are attempting to remove
+     * @param item the item that this holder is to be applied to
      * @return a boolean that states whether this holder already contains a type of enchantment
      */
     public boolean removeEnchantment(Enchantment enchantment, ItemStack item) {
@@ -86,15 +88,16 @@ public class EnchantmentHolder implements Serializable {
      * Adds an enchantment from the holder
      *
      * @param enchantment the enchantment you are attempting to remove
+     * @param item the item that this holder is to be applied to
      * @return a boolean that states whether this holder already contains a type of enchantment
      */
     public boolean addEnchantment(ActiveEnchantment enchantment, ItemStack item) {
         if (this.hasEnchantment(enchantment.getEnchantment())) {
             this.getEnchantment(enchantment.getEnchantment()).setLevel(enchantment.getLevel());
-            return true;
+        } else {
+            this.enchantments.add(enchantment);
         }
 
-        this.enchantments.add(enchantment);
         this.updateItem(item);
 
         return true;
@@ -111,6 +114,8 @@ public class EnchantmentHolder implements Serializable {
 
     /**
      * Updates the lore on the item based on the enchantments
+     *
+     * @param item the item that this holder is to be applied to
      */
     public void updateItem(ItemStack item) {
         ItemMeta meta = item.getItemMeta();

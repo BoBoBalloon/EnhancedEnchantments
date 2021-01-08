@@ -70,6 +70,9 @@ public abstract class Enchantment {
 
     /**
      * Effect that the enchantment gives
+     *
+     * @param event the bukkit event that was fired for this effect
+     * @param enchantment the active enchantment that triggered this method
      */
     public abstract void effect(Event event, ActiveEnchantment enchantment);
 }

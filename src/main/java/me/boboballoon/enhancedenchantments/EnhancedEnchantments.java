@@ -17,7 +17,7 @@ public final class EnhancedEnchantments extends JavaPlugin {
 
     /*
     TODO:
-    1. fix bug where enchantments at the same lvl can still be applied
+    1. add descriptions to all enchantments
     2. make api events that other devs can listen for
     3. make enchanting table ui
     4. disable all normal enchantments

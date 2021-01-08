@@ -4,6 +4,7 @@ import me.boboballoon.enhancedenchantments.enchantment.ActiveEnchantment;
 import me.boboballoon.enhancedenchantments.enchantment.EnchantmentTier;
 import me.boboballoon.enhancedenchantments.enchantment.ItemEnchantmentTrigger;
 import me.boboballoon.enhancedenchantments.enchantment.WeaponEnchantment;
+import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
@@ -22,6 +23,7 @@ public class UpUpAndAway extends WeaponEnchantment {
         Vector vector = new Vector(0, enchantment.getLevel(), 0);
         Entity entity = damage.getEntity();
         entity.setVelocity(vector);
-        entity.getLocation().getWorld().spawnParticle(Particle.HEART, entity.getLocation(), 100);
+        entity.getLocation().getWorld().spawnParticle(Particle.HEART, entity.getLocation(), 100, .5, .5, .5);
+        Bukkit.broadcastMessage(enchantment.getEnchantment().getName()); //remove
     }
 }

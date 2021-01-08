@@ -4,6 +4,7 @@ import me.boboballoon.enhancedenchantments.enchantment.ActiveEnchantment;
 import me.boboballoon.enhancedenchantments.enchantment.EnchantmentTier;
 import me.boboballoon.enhancedenchantments.enchantment.ItemEnchantmentTrigger;
 import me.boboballoon.enhancedenchantments.enchantment.WeaponEnchantment;
+import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
@@ -21,6 +22,7 @@ public class InstantKill extends WeaponEnchantment {
             LivingEntity livingEntity = (LivingEntity) damage.getEntity();
             livingEntity.setHealth(0);
             livingEntity.getLocation().getWorld().spawnParticle(Particle.CRIT_MAGIC, livingEntity.getLocation(), 100);
+            Bukkit.broadcastMessage(enchantment.getEnchantment().getName()); //remove
         }
     }
 }
