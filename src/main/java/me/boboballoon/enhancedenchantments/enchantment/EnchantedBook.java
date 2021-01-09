@@ -8,6 +8,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.List;
+
 public class EnchantedBook {
     private final Enchantment enchantment;
     private final int level;
@@ -92,6 +94,15 @@ public class EnchantedBook {
         ItemMeta meta = item.getItemMeta();
 
         meta.setDisplayName(TextUtil.format("&r" + this.enchantment.getTier().getColor() + this.enchantment.getName() + "&r&7&l - " + this.level));
+
+        List<String> lore = this.enchantment.getDescription();
+        for (int i = 0; i < lore.size(); i++) {
+            String line = lore.get(i);
+            line = this.getEnchantment().getTier().getColor() + line;
+            lore.set(i, line);
+        }
+
+        meta.setLore(lore);
 
         meta.getPersistentDataContainer().set(KEY, PersistentDataType.STRING, this.enchantment.getName() + "-" + this.level);
 

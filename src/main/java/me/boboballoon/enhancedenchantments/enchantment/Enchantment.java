@@ -3,6 +3,8 @@ package me.boboballoon.enhancedenchantments.enchantment;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -11,17 +13,19 @@ public abstract class Enchantment {
     private final int maxLevel;
     private final EnchantmentTier tier;
     private final EnchantmentTrigger trigger;
+    private final List<String> description;
 
     /**
      * random object built into enchantment class so you don't have to initialize your own
      */
     protected final Random random = ThreadLocalRandom.current();
 
-    public Enchantment(String name, int maxLevel, EnchantmentTier tier, EnchantmentTrigger trigger) {
+    public Enchantment(String name, int maxLevel, EnchantmentTier tier, EnchantmentTrigger trigger, List<String> description) {
         this.name = name;
         this.maxLevel = maxLevel;
         this.tier = tier;
         this.trigger = trigger;
+        this.description = description;
     }
 
     /**
@@ -58,6 +62,15 @@ public abstract class Enchantment {
      */
     public EnchantmentTrigger getTrigger() {
         return this.trigger;
+    }
+
+    /**
+     * Returns a copy of the description of this enchantment
+     *
+     * @return a copy of the description of this enchantment
+     */
+    public List<String> getDescription() {
+        return new ArrayList<>(this.description);
     }
 
     /**

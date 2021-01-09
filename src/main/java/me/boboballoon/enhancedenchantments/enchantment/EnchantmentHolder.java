@@ -8,12 +8,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class EnchantmentHolder implements Serializable {
+public class EnchantmentHolder {
     private final List<ActiveEnchantment> enchantments;
 
     public static final NamespacedKey KEY = new NamespacedKey(EnhancedEnchantments.getInstance(), "custom_enchantments");
@@ -21,10 +20,6 @@ public class EnchantmentHolder implements Serializable {
 
     public EnchantmentHolder() {
         this.enchantments = new ArrayList<>();
-    }
-
-    public EnchantmentHolder(List<ActiveEnchantment> enchantments) {
-        this.enchantments = enchantments;
     }
 
     /**

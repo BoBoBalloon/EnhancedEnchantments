@@ -17,10 +17,8 @@ public final class EnhancedEnchantments extends JavaPlugin {
 
     /*
     TODO:
-    1. add descriptions to all enchantments
-    2. make api events that other devs can listen for
-    3. make enchanting table ui
-    4. disable all normal enchantments
+    1. make enchanting table ui
+    2. disable all normal enchantments
      */
 
     @Override

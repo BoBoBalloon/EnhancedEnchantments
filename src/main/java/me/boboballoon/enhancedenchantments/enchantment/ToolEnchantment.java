@@ -3,9 +3,11 @@ package me.boboballoon.enhancedenchantments.enchantment;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
+
 public abstract class ToolEnchantment extends ItemEnchantment {
-    public ToolEnchantment(String name, int maxLevel, EnchantmentTier tier, ItemEnchantmentTrigger trigger) {
-        super(name, maxLevel, tier, trigger);
+    public ToolEnchantment(String name, int maxLevel, EnchantmentTier tier, EnchantmentTrigger trigger, List<String> description) {
+        super(name, maxLevel, tier, trigger, description);
     }
 
     @Override
