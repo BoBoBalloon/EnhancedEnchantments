@@ -9,6 +9,7 @@ import me.boboballoon.enhancedenchantments.listeners.EnchantmentBookApplyListene
 import me.boboballoon.enhancedenchantments.listeners.RemoveVanillaEnchantmentListener;
 import me.boboballoon.enhancedenchantments.manager.EnchantmentManager;
 import me.boboballoon.enhancedenchantments.ui.UIManager;
+import me.boboballoon.enhancedenchantments.ui.anvil.AnvilListener;
 import me.boboballoon.enhancedenchantments.ui.enchantingtable.EnchantingTableListener;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -29,7 +30,7 @@ public final class EnhancedEnchantments extends JavaPlugin {
         Bukkit.getPluginCommand("getenchantment").setTabCompleter(new GetEnchantmentCompleter());
 
         this.registerListeners(this.enchantmentManager, new EnchantmentBookApplyListener(), new EnchantingTableListener(),
-                new RemoveVanillaEnchantmentListener());
+                new AnvilListener(), new RemoveVanillaEnchantmentListener());
 
         this.enchantmentManager.registerEnchantments(new InstantKill(), new UpUpAndAway(), new UltraThorns()); //add enchantments
     }

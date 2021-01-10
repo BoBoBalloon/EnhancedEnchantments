@@ -1,5 +1,6 @@
 package me.boboballoon.enhancedenchantments.manager;
 
+import me.boboballoon.enhancedenchantments.enchantment.EnchantedBook;
 import me.boboballoon.enhancedenchantments.enchantment.EnchantmentHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -24,6 +25,22 @@ public class EnchantmentUtil {
         ItemMeta meta = item.getItemMeta();
 
         return meta.getPersistentDataContainer().has(EnchantmentHolder.KEY, PersistentDataType.STRING);
+    }
+
+    /**
+     * Check if an item is an enchanted book
+     *
+     * @param item the item which you wish to check
+     * @return true if the item is an enchanted book otherwise false
+     */
+    public static boolean isEnchantedBook(ItemStack item) {
+        if (!item.hasItemMeta()) {
+            return false;
+        }
+
+        ItemMeta meta = item.getItemMeta();
+
+        return meta.getPersistentDataContainer().has(EnchantedBook.KEY, PersistentDataType.STRING);
     }
 
     /**
