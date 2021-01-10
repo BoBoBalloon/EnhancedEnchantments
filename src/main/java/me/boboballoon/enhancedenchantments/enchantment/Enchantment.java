@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Superclass of any type of enchantment
+ */
 public abstract class Enchantment {
     private final String name;
     private final int maxLevel;

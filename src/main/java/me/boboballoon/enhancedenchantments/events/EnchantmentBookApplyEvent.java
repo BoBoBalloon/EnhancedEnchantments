@@ -5,6 +5,9 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
+/**
+ * An event that's fired every time a player tries to apply an enchantment book to an item
+ */
 public class EnchantmentBookApplyEvent extends Event implements Cancellable {
     private final ActiveEnchantment enchantment;
     private boolean cancelled;

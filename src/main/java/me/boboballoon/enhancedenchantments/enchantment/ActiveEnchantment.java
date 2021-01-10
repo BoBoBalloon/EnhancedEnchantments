@@ -1,5 +1,8 @@
 package me.boboballoon.enhancedenchantments.enchantment;
 
+/**
+ * Class that represents an enchantment on an itemstack
+ */
 public class ActiveEnchantment {
     private final Enchantment enchantment;
     private final EnchantmentHolder holder;

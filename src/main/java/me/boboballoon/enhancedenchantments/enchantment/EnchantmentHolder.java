@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Class that represents an enchantment holder on an itemstack
+ */
 public class EnchantmentHolder {
     private final List<ActiveEnchantment> enchantments;
 
@@ -66,7 +69,7 @@ public class EnchantmentHolder {
      *
      * @param enchantment the enchantment you are attempting to remove
      * @param item the item that this holder is to be applied to
-     * @return a boolean that states whether this holder already contains a type of enchantment
+     * @return a boolean that states whether this holder contains the enchantment you are trying to remove
      */
     public boolean removeEnchantment(Enchantment enchantment, ItemStack item) {
         for (ActiveEnchantment activeEnchantment : this.enchantments) {
@@ -82,11 +85,15 @@ public class EnchantmentHolder {
     /**
      * Adds an enchantment from the holder
      *
-     * @param enchantment the enchantment you are attempting to remove
+     * @param enchantment the enchantment you are attempting to add
      * @param item the item that this holder is to be applied to
-     * @return a boolean that states whether this holder already contains a type of enchantment
+     * @return a boolean that states whether this type of enchantment can be added to said item
      */
     public boolean addEnchantment(ActiveEnchantment enchantment, ItemStack item) {
+        if (!enchantment.getEnchantment().canEnchant(item)) {
+            return false;
+        }
+
         if (this.hasEnchantment(enchantment.getEnchantment())) {
             this.getEnchantment(enchantment.getEnchantment()).setLevel(enchantment.getLevel());
         } else {

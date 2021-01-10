@@ -1,5 +1,6 @@
 package me.boboballoon.enhancedenchantments.manager;
 
+import me.boboballoon.enhancedenchantments.EnhancedEnchantments;
 import me.boboballoon.enhancedenchantments.enchantment.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,10 +13,13 @@ import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
 
+/**
+ * A class that deals with registering enchantments and listening for triggers
+ */
 public final class EnchantmentManager implements Listener {
     private final Set<Enchantment> enchantments;
 
@@ -29,7 +33,15 @@ public final class EnchantmentManager implements Listener {
      * @param enchantments all of the enchantments you wish to register
      */
     public void registerEnchantments(Enchantment... enchantments) {
-        Collections.addAll(this.enchantments, enchantments);
+        for (Enchantment enchantment : enchantments) {
+            for (Enchantment loadedEnchantment : this.enchantments) {
+                if (enchantment.getName().equals(loadedEnchantment.getName())) {
+                    EnhancedEnchantments.getInstance().getLogger().log(Level.SEVERE, "An enchantment with the name " + enchantment.getName() + " already exists, registering has been cancelled!");
+                    return;
+                }
+            }
+            this.enchantments.add(enchantment);
+        }
     }
 
     /**
@@ -56,6 +68,22 @@ public final class EnchantmentManager implements Listener {
             }
         }
         return null;
+    }
+
+    /**
+     * Returns all registered enchantments from the specified tier
+     *
+     * @param tier the specified tier
+     * @return all registered enchantments from the specified tier
+     */
+    public Set<Enchantment> getEnchantments(EnchantmentTier tier) {
+        Set<Enchantment> enchantments = new HashSet<>();
+        for (Enchantment enchantment : this.enchantments) {
+            if (enchantment.getTier() == tier) {
+                enchantments.add(enchantment);
+            }
+        }
+        return enchantments;
     }
 
     /**

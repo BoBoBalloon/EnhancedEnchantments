@@ -5,6 +5,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
+/**
+ * Superclass of any enchantment having to do with armor
+ */
 public abstract class ArmorEnchantment extends Enchantment {
     public ArmorEnchantment(String name, int maxLevel, EnchantmentTier tier, EnchantmentTrigger trigger, List<String> description) {
         super(name, maxLevel, tier, trigger, description);

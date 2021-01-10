@@ -9,7 +9,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.List;
+import java.util.logging.Level;
 
+/**
+ * Class that represents an enchantment book
+ */
 public class EnchantedBook {
     private final Enchantment enchantment;
     private final int level;
@@ -21,6 +25,8 @@ public class EnchantedBook {
         this.enchantment = enchantment;
         if (level > enchantment.getMaxLevel()) {
             level = enchantment.getMaxLevel();
+        } else if (level < 1) {
+            level = 1;
         }
         this.level = level;
         this.book = this.buildBook();
@@ -101,6 +107,40 @@ public class EnchantedBook {
             line = this.getEnchantment().getTier().getColor() + line;
             lore.set(i, line);
         }
+
+        lore.add("");
+
+        String applicable;
+        if (this.enchantment instanceof HelmetEnchantment) {
+            //helmet enchantment
+            applicable = TextUtil.format("&r&cApplicable to helmets");
+        } else if (this.enchantment instanceof ChestplateEnchantment) {
+            //chestplate enchantment
+            applicable = TextUtil.format("&r&cApplicable to chestplates");
+        } else if (this.enchantment instanceof LeggingsEnchantment) {
+            //leggings enchantment
+            applicable = TextUtil.format("&r&cApplicable to leggings");
+        } else if (this.enchantment instanceof BootsEnchantment) {
+            //boots enchantment
+            applicable = TextUtil.format("&r&cApplicable to boots");
+        } else if (this.enchantment instanceof WeaponEnchantment) {
+            //weapon enchantment
+            applicable = TextUtil.format("&r&cApplicable to weapons");
+        } else if (this.enchantment instanceof ToolEnchantment) {
+            //tool enchantment
+            applicable = TextUtil.format("&r&cApplicable to tools");
+        } else if (this.enchantment instanceof ItemEnchantment) {
+            //item enchantment
+            applicable = TextUtil.format("&r&cApplicable to items");
+        } else if (this.enchantment instanceof ArmorEnchantment) {
+            //armor enchantment
+            applicable = TextUtil.format("&r&cApplicable to armor");
+        } else {
+            applicable = TextUtil.format("&r&4Unknown enchantment type (report to server owner)");
+            EnhancedEnchantments.getInstance().getLogger().log(Level.WARNING, "The enchantment type of enchantment " + this.enchantment.getName() + " is unknown!");
+        }
+
+        lore.add(applicable);
 
         meta.setLore(lore);
 

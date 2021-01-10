@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"me.boboballoon.enhancedenchantments.api"},{"l":"me.boboballoon.enhancedenchantments.enchantment"},{"l":"me.boboballoon.enhancedenchantments.events"},{"l":"me.boboballoon.enhancedenchantments.manager"}]

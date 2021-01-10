@@ -5,6 +5,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+/**
+ * A class that has util methods to help retrieve enchantments from itemstacks
+ */
 public class EnchantmentUtil {
 
     /**
