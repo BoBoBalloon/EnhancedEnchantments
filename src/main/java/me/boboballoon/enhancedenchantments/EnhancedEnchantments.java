@@ -2,10 +2,9 @@ package me.boboballoon.enhancedenchantments;
 
 import me.boboballoon.enhancedenchantments.commands.GetEnchantmentCommand;
 import me.boboballoon.enhancedenchantments.commands.GetEnchantmentCompleter;
-import me.boboballoon.enhancedenchantments.enchantments.InstantKill;
-import me.boboballoon.enhancedenchantments.enchantments.UltraThorns;
-import me.boboballoon.enhancedenchantments.enchantments.UpUpAndAway;
+import me.boboballoon.enhancedenchantments.enchantments.*;
 import me.boboballoon.enhancedenchantments.listeners.EnchantmentBookApplyListener;
+import me.boboballoon.enhancedenchantments.listeners.GrindstoneOpenListener;
 import me.boboballoon.enhancedenchantments.listeners.RemoveVanillaEnchantmentListener;
 import me.boboballoon.enhancedenchantments.manager.EnchantmentManager;
 import me.boboballoon.enhancedenchantments.ui.UIManager;
@@ -18,21 +17,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class EnhancedEnchantments extends JavaPlugin {
     private static EnhancedEnchantments instance;
 
+    private EnchantmentManager enchantmentManager;
     private UIManager uiManager;
-    private final EnchantmentManager enchantmentManager = new EnchantmentManager();
 
     @Override
     public void onEnable() {
         instance = this;
+        enchantmentManager = new EnchantmentManager();
         uiManager = new UIManager();
 
         Bukkit.getPluginCommand("getenchantment").setExecutor(new GetEnchantmentCommand());
         Bukkit.getPluginCommand("getenchantment").setTabCompleter(new GetEnchantmentCompleter());
 
         this.registerListeners(this.enchantmentManager, new EnchantmentBookApplyListener(), new EnchantingTableListener(),
-                new AnvilListener(), new RemoveVanillaEnchantmentListener());
+                new AnvilListener(), new RemoveVanillaEnchantmentListener(), new GrindstoneOpenListener());
 
-        this.enchantmentManager.registerEnchantments(new InstantKill(), new UpUpAndAway(), new UltraThorns()); //add enchantments
+        this.enchantmentManager.registerEnchantments(new AllSeeingEyeEnchant(), new AntiGravityEnchant(), new DeterminedEnchant(),
+                new DevourEnchant(), new InquiringEnchant(), new LifestealEnchantment(), new UntouchableEnchant());
     }
 
 

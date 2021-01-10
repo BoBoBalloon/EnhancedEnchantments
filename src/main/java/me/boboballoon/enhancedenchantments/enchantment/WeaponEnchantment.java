@@ -9,7 +9,7 @@ import java.util.List;
  * Superclass of any enchantment having to do with a sword
  */
 public abstract class WeaponEnchantment extends ItemEnchantment {
-    public WeaponEnchantment(String name, int maxLevel, EnchantmentTier tier, EnchantmentTrigger trigger, List<String> description) {
+    public WeaponEnchantment(String name, int maxLevel, EnchantmentTier tier, ItemEnchantmentTrigger trigger, List<String> description) {
         super(name, maxLevel, tier, trigger, description);
     }
 

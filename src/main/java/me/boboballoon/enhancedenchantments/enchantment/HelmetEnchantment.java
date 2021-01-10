@@ -9,7 +9,7 @@ import java.util.List;
  * Superclass of any enchantment having to do with a helmet
  */
 public abstract class HelmetEnchantment extends ArmorEnchantment {
-    public HelmetEnchantment(String name, int maxLevel, EnchantmentTier tier, EnchantmentTrigger trigger, List<String> description) {
+    public HelmetEnchantment(String name, int maxLevel, EnchantmentTier tier, ArmorEnchantmentTrigger trigger, List<String> description) {
         super(name, maxLevel, tier, trigger, description);
     }
 

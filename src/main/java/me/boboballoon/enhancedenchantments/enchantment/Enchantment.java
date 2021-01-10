@@ -1,5 +1,6 @@
 package me.boboballoon.enhancedenchantments.enchantment;
 
+import me.boboballoon.enhancedenchantments.EnhancedEnchantments;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 
@@ -7,11 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
 
 /**
  * Superclass of any type of enchantment
  */
 public abstract class Enchantment {
+    /**
+     * Name cannot contain the characters `-` or `:`
+     */
     private final String name;
     private final int maxLevel;
     private final EnchantmentTier tier;
@@ -24,6 +29,10 @@ public abstract class Enchantment {
     protected final Random random = ThreadLocalRandom.current();
 
     public Enchantment(String name, int maxLevel, EnchantmentTier tier, EnchantmentTrigger trigger, List<String> description) {
+        if (name.contains("-") || name.contains(":")) {
+            EnhancedEnchantments.getInstance().getLogger().log(Level.SEVERE, "You cannot have an enchantment name contain the characters `-` or `:`");
+            name = null;
+        }
         this.name = name;
         this.maxLevel = maxLevel;
         this.tier = tier;

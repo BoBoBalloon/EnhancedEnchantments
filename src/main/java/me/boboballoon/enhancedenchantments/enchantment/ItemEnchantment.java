@@ -9,7 +9,7 @@ import java.util.List;
  * Superclass of any enchantment having to do with an item
  */
 public abstract class ItemEnchantment extends Enchantment {
-    public ItemEnchantment(String name, int maxLevel, EnchantmentTier tier, EnchantmentTrigger trigger, List<String> description) {
+    public ItemEnchantment(String name, int maxLevel, EnchantmentTier tier, ItemEnchantmentTrigger trigger, List<String> description) {
         super(name, maxLevel, tier, trigger, description);
     }
 

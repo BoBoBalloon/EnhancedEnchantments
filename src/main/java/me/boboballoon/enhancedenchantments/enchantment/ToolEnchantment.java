@@ -9,7 +9,7 @@ import java.util.List;
  * Superclass of any enchantment having to do with a tool
  */
 public abstract class ToolEnchantment extends ItemEnchantment {
-    public ToolEnchantment(String name, int maxLevel, EnchantmentTier tier, EnchantmentTrigger trigger, List<String> description) {
+    public ToolEnchantment(String name, int maxLevel, EnchantmentTier tier, ItemEnchantmentTrigger trigger, List<String> description) {
         super(name, maxLevel, tier, trigger, description);
     }
 

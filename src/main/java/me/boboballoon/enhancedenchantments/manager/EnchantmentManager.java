@@ -2,12 +2,16 @@ package me.boboballoon.enhancedenchantments.manager;
 
 import me.boboballoon.enhancedenchantments.EnhancedEnchantments;
 import me.boboballoon.enhancedenchantments.enchantment.*;
+import me.boboballoon.enhancedenchantments.events.PlayerNullEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
@@ -25,6 +29,27 @@ public final class EnchantmentManager implements Listener {
 
     public EnchantmentManager() {
         this.enchantments = new HashSet<>();
+
+        Bukkit.getScheduler().runTaskTimerAsynchronously(EnhancedEnchantments.getInstance(), () -> {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                Set<ItemStack> items = new HashSet<>(Arrays.asList(player.getInventory().getArmorContents()));
+                items.add(player.getInventory().getItemInMainHand());
+                for (ItemStack item : items) {
+                    if (item == null || !EnchantmentUtil.isEnchanted(item)) {
+                        continue;
+                    }
+
+                    for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
+                        if (enchantment.getEnchantment().getTrigger() != ArmorEnchantmentTrigger.EVERY_SECOND &&
+                                enchantment.getEnchantment().getTrigger() != ItemEnchantmentTrigger.EVERY_SECOND) {
+                            continue;
+                        }
+
+                        Bukkit.getScheduler().runTask(EnhancedEnchantments.getInstance(), () -> enchantment.getEnchantment().effect(new PlayerNullEvent(player), enchantment));
+                    }
+                }
+            }
+        }, 0L, 20L);
     }
 
     /**
@@ -230,6 +255,34 @@ public final class EnchantmentManager implements Listener {
             }
 
             if (enchantment.getEnchantment().getTrigger() != ItemEnchantmentTrigger.ON_DAMAGE_DEALT) {
+                continue;
+            }
+
+            enchantment.getEnchantment().effect(event, enchantment);
+        }
+    }
+
+    @EventHandler
+    public void onEntityDeath(EntityDeathEvent event) {
+        LivingEntity entity = event.getEntity();
+        Player player = entity.getKiller();
+
+        if (player == null) {
+            return;
+        }
+
+        ItemStack item = player.getInventory().getItemInMainHand();
+
+        if (!EnchantmentUtil.isEnchanted(item)) {
+            return;
+        }
+
+        for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
+            if (!(enchantment.getEnchantment() instanceof WeaponEnchantment)) {
+                continue;
+            }
+
+            if (enchantment.getEnchantment().getTrigger() != ItemEnchantmentTrigger.ON_ENTITY_KILLED) {
                 continue;
             }
 

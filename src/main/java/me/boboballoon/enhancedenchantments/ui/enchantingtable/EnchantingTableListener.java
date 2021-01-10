@@ -66,9 +66,7 @@ public class EnchantingTableListener implements Listener {
 
         Enchantment enchantment = enchantments.get(index);
 
-        int level = random.nextInt(enchantment.getMaxLevel()) + 1;
-
-        EnchantedBook book = new EnchantedBook(enchantment, level);
+        EnchantedBook book = new EnchantedBook(enchantment, 1);
 
         player.giveExpLevels(-tier.getLevels());
 
