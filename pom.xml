@@ -36,7 +36,9 @@
                     <links>
                         <link>https://hub.spigotmc.org/javadocs/spigot/</link>
                     </links>
-                    <excludePackageNames>me.boboballoon.enhancedenchantments:me.boboballoon.enhancedenchantments.commands:me.boboballoon.enhancedenchantments.enchantments:me.boboballoon.enhancedenchantments.listeners:me.boboballoon.enhancedenchantments.utils:me.boboballoon.enhancedenchantments.ui:me.boboballoon.enhancedenchantments.ui.*</excludePackageNames>
+                    <excludePackageNames>
+                        me.boboballoon.enhancedenchantments:me.boboballoon.enhancedenchantments.commands:me.boboballoon.enhancedenchantments.enchantments:me.boboballoon.enhancedenchantments.listeners:me.boboballoon.enhancedenchantments.utils:me.boboballoon.enhancedenchantments.ui:me.boboballoon.enhancedenchantments.ui.*
+                    </excludePackageNames>
                     <reportOutputDirectory>${project.basedir}/docs</reportOutputDirectory>
                 </configuration>
             </plugin>
