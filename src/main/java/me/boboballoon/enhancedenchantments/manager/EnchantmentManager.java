@@ -40,7 +40,9 @@ public final class EnchantmentManager implements Listener {
                     }
 
                     for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
-                        if (enchantment.getEnchantment().getTrigger() != ArmorEnchantmentTrigger.EVERY_SECOND &&
+                        //REMOVE DEPRECATED SHIT LATER
+                        if (enchantment.getEnchantment().getTrigger() != UniversalEnchantmentTrigger.EVERY_SECOND&&
+                                enchantment.getEnchantment().getTrigger() != ArmorEnchantmentTrigger.EVERY_SECOND &&
                                 enchantment.getEnchantment().getTrigger() != ItemEnchantmentTrigger.EVERY_SECOND) {
                             continue;
                         }
@@ -171,8 +173,7 @@ public final class EnchantmentManager implements Listener {
             for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
                 EnchantmentTrigger trigger = enchantment.getEnchantment().getTrigger();
 
-                //remove deprecated shit later
-                if (trigger != UniversalEnchantmentTrigger.ON_DURABILITY_LOSS && trigger != ItemEnchantmentTrigger.ON_DURABILITY_LOSS && trigger != ArmorEnchantmentTrigger.ON_DURABILITY_LOSS) {
+                if (trigger != UniversalEnchantmentTrigger.ON_DURABILITY_LOSS) {
                     continue;
                 }
 
@@ -192,8 +193,7 @@ public final class EnchantmentManager implements Listener {
         for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
             EnchantmentTrigger trigger = enchantment.getEnchantment().getTrigger();
 
-            //remove deprecated shit later
-            if (trigger != UniversalEnchantmentTrigger.ON_ITEM_BREAK && trigger != ItemEnchantmentTrigger.ON_ITEM_BREAK && trigger != ArmorEnchantmentTrigger.ON_ITEM_BREAK) {
+            if (trigger != UniversalEnchantmentTrigger.ON_ITEM_BREAK) {
                 continue;
             }
 

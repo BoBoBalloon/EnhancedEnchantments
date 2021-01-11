@@ -11,7 +11,7 @@ import java.util.Collections;
 
 public class DeterminedEnchant extends ToolEnchantment {
     public DeterminedEnchant() {
-        super("Determined", 4, EnchantmentTier.EPIC, ItemEnchantmentTrigger.EVERY_SECOND, Collections.singletonList("This enchantment will give you permanent haste"));
+        super("Determined", 4, EnchantmentTier.EPIC, UniversalEnchantmentTrigger.EVERY_SECOND, Collections.singletonList("This enchantment will give you permanent haste"));
     }
 
     @Override
