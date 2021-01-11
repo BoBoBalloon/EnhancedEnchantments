@@ -135,6 +135,9 @@ public class EnchantedBook {
         } else if (this.enchantment instanceof ArmorEnchantment) {
             //armor enchantment
             applicable = TextUtil.format("&r&cApplicable to armor");
+        } else if (this.enchantment instanceof UniversalEnchantment) {
+            //universal enchantment
+            applicable = TextUtil.format("&r&cApplicable to weapons/tools/armor");
         } else {
             applicable = TextUtil.format("&r&4Unknown enchantment type (report to server owner)");
             EnhancedEnchantments.getInstance().getLogger().log(Level.WARNING, "The enchantment type of enchantment " + this.enchantment.getName() + " is unknown!");

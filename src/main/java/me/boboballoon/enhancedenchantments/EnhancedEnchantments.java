@@ -33,7 +33,8 @@ public final class EnhancedEnchantments extends JavaPlugin {
                 new AnvilListener(), new RemoveVanillaEnchantmentListener(), new GrindstoneOpenListener());
 
         this.enchantmentManager.registerEnchantments(new AllSeeingEyeEnchant(), new AntiGravityEnchant(), new DeterminedEnchant(),
-                new DevourEnchant(), new InquiringEnchant(), new LifestealEnchantment(), new UntouchableEnchant());
+                new DevourEnchant(), new InquiringEnchant(), new LifestealEnchantment(), new UntouchableEnchant(), new TelepathyEnchant(),
+                new UnwaveringEnchant());
     }
 
 

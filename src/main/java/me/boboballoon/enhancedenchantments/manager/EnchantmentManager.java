@@ -170,7 +170,9 @@ public final class EnchantmentManager implements Listener {
 
             for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
                 EnchantmentTrigger trigger = enchantment.getEnchantment().getTrigger();
-                if (trigger != ItemEnchantmentTrigger.ON_DURABILITY_LOSS && trigger != ArmorEnchantmentTrigger.ON_DURABILITY_LOSS) {
+
+                //remove deprecated shit later
+                if (trigger != UniversalEnchantmentTrigger.ON_DURABILITY_LOSS && trigger != ItemEnchantmentTrigger.ON_DURABILITY_LOSS && trigger != ArmorEnchantmentTrigger.ON_DURABILITY_LOSS) {
                     continue;
                 }
 
@@ -189,7 +191,9 @@ public final class EnchantmentManager implements Listener {
 
         for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
             EnchantmentTrigger trigger = enchantment.getEnchantment().getTrigger();
-            if (trigger != ItemEnchantmentTrigger.ON_ITEM_BREAK && trigger != ArmorEnchantmentTrigger.ON_ITEM_BREAK) {
+
+            //remove deprecated shit later
+            if (trigger != UniversalEnchantmentTrigger.ON_ITEM_BREAK && trigger != ItemEnchantmentTrigger.ON_ITEM_BREAK && trigger != ArmorEnchantmentTrigger.ON_ITEM_BREAK) {
                 continue;
             }
 
