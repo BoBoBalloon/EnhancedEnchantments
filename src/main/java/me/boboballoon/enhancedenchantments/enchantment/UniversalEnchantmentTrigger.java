@@ -14,4 +14,9 @@ public enum UniversalEnchantmentTrigger implements ArmorTrigger, ItemTrigger {
      * @see org.bukkit.event.player.PlayerItemBreakEvent
      */
     ON_ITEM_BREAK,
+    /**
+     * Will fire once every second, event will return PlayerNullEvent
+     * @see me.boboballoon.enhancedenchantments.events.PlayerNullEvent
+     */
+    EVERY_SECOND
 }
