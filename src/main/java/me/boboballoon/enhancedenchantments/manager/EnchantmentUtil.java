@@ -2,9 +2,13 @@ package me.boboballoon.enhancedenchantments.manager;
 
 import me.boboballoon.enhancedenchantments.enchantment.EnchantedBook;
 import me.boboballoon.enhancedenchantments.enchantment.EnchantmentHolder;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+
+import java.util.Collections;
 
 /**
  * A class that has util methods to help retrieve enchantments from itemstacks
@@ -18,7 +22,7 @@ public class EnchantmentUtil {
      * @return true if the item does have an enchantment otherwise false
      */
     public static boolean isEnchanted(ItemStack item) {
-        if (!item.hasItemMeta()) {
+        if (item == null || !item.hasItemMeta()) {
             return false;
         }
 
@@ -34,7 +38,7 @@ public class EnchantmentUtil {
      * @return true if the item is an enchanted book otherwise false
      */
     public static boolean isEnchantedBook(ItemStack item) {
-        if (!item.hasItemMeta()) {
+        if (item == null || !item.hasItemMeta()) {
             return false;
         }
 
@@ -54,7 +58,22 @@ public class EnchantmentUtil {
             return buildHolder(item);
         }
 
-        return EnchantmentHolder.fromString(item.getItemMeta().getPersistentDataContainer().get(EnchantmentHolder.KEY, PersistentDataType.STRING));
+        EnchantmentHolder holder = EnchantmentHolder.fromString(item.getItemMeta().getPersistentDataContainer().get(EnchantmentHolder.KEY, PersistentDataType.STRING));
+
+        if (holder.isEmpty()) {
+            ItemMeta meta = item.getItemMeta();
+            for (Enchantment enchantment : meta.getEnchants().keySet()) {
+                meta.removeEnchant(enchantment);
+            }
+            meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+            meta.setLore(Collections.emptyList());
+            meta.getPersistentDataContainer().remove(EnchantmentHolder.KEY);
+            item.setItemMeta(meta);
+            return null;
+        }
+
+        holder.updateItem(item);
+        return holder;
     }
 
     private static EnchantmentHolder buildHolder(ItemStack item) {

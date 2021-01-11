@@ -14,6 +14,11 @@ public abstract class WeaponEnchantment extends ItemEnchantment {
     }
 
     @Override
+    public String applicableTo() {
+        return "weapons";
+    }
+
+    @Override
     public boolean canEnchant(ItemStack item) {
         Material type = item.getType();
         return type == Material.WOODEN_SWORD ||

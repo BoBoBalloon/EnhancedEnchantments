@@ -35,6 +35,24 @@ public class EnchantmentHolder {
     }
 
     /**
+     * Returns a boolean that is true if there are no elements present in the list
+     *
+     * @return true if there are no elements present in the list
+     */
+    public boolean isEmpty() {
+        return this.enchantments.isEmpty();
+    }
+
+    /**
+     * Returns an int that is the amount of elements present in the list
+     *
+     * @return an int that is the amount of elements present in the list
+     */
+    public int size() {
+        return this.enchantments.size();
+    }
+
+    /**
      * Returns the specified enchantment inside the holder
      *
      * @param enchantment the enchantment you wish to get
@@ -169,7 +187,7 @@ public class EnchantmentHolder {
             String[] args = enchantment.split("-");
             Enchantment base = EnhancedEnchantments.getInstance().getEnchantmentManager().getEnchantment(args[0]);
             if (base == null) {
-                return null;
+                continue;
             }
 
             int level;

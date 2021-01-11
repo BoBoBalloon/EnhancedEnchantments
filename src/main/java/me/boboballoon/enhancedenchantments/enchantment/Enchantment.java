@@ -85,6 +85,15 @@ public abstract class Enchantment {
         return new ArrayList<>(this.description);
     }
 
+
+    /**
+     * Returns a string that describes what types of items the enchantment can be applied to
+     * (e.g. "weapons and tools")
+     *
+     * @return a string that describes what types of items the enchantment can be applied to
+     */
+    public abstract String applicableTo();
+
     /**
      * Returns a boolean that is true when an item can be enchanted, false when the item cannot be
      *

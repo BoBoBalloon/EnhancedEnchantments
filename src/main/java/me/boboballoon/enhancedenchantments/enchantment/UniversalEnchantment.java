@@ -14,6 +14,11 @@ public abstract class UniversalEnchantment extends Enchantment {
     }
 
     @Override
+    public String applicableTo() {
+        return "armor/weapons/tools";
+    }
+
+    @Override
     public boolean canEnchant(ItemStack item) {
         Material type = item.getType();
         return type == Material.WOODEN_AXE ||

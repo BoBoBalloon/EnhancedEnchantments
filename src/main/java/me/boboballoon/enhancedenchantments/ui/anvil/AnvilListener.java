@@ -47,9 +47,7 @@ public class AnvilListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        Inventory inventory = event.getClickedInventory();
-
-        if (inventory == null || !(inventory.getHolder() instanceof AnvilUI)) {
+        if (!(event.getView().getTopInventory().getHolder() instanceof AnvilUI)) {
             return;
         }
 
@@ -58,15 +56,20 @@ public class AnvilListener implements Listener {
         }
 
         Player player = (Player) event.getWhoClicked();
-
-        AnvilUI anvil = (AnvilUI) inventory.getHolder();
-
-        boolean check = this.check(inventory, event.getSlot());
+        AnvilUI anvil = (AnvilUI) event.getView().getTopInventory().getHolder();
 
         Bukkit.getScheduler().runTaskLater(EnhancedEnchantments.getInstance(), () -> {
             anvil.reloadInventory();
             player.updateInventory();
         }, 1L);
+
+        Inventory inventory = event.getClickedInventory();
+
+        if (inventory == null || !(inventory.getHolder() instanceof AnvilUI)) {
+            return;
+        }
+
+        boolean check = this.check(inventory, event.getSlot());
 
         if (event.getCurrentItem() == null || check) {
             return;

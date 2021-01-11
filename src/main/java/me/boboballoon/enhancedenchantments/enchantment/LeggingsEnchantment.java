@@ -14,6 +14,11 @@ public abstract class LeggingsEnchantment extends ArmorEnchantment {
     }
 
     @Override
+    public String applicableTo() {
+        return "leggings";
+    }
+
+    @Override
     public boolean canEnchant(ItemStack item) {
         Material type = item.getType();
         return type == Material.LEATHER_LEGGINGS ||

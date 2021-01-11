@@ -43,13 +43,17 @@ public class EnchantmentBookApplyListener implements Listener {
             return;
         }
 
-        if (!enchantedBook.getEnchantment().canEnchant(clicked)) {
-            return;
-        }
+        EnchantmentHolder holder = EnchantmentUtil.getEnchantmentHolder(clicked);
 
         event.setCancelled(true);
 
-        EnchantmentHolder holder = EnchantmentUtil.getEnchantmentHolder(clicked);
+        if (holder == null) {
+            return;
+        }
+
+        if (!enchantedBook.getEnchantment().canEnchant(clicked)) {
+            return;
+        }
 
         if (holder.hasEnchantment(enchantedBook.getEnchantment()) && holder.getEnchantment(enchantedBook.getEnchantment()).getLevel() >= enchantedBook.getLevel()) {
             return;

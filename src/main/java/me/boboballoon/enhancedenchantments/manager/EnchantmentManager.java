@@ -35,11 +35,17 @@ public final class EnchantmentManager implements Listener {
                 Set<ItemStack> items = new HashSet<>(Arrays.asList(player.getInventory().getArmorContents()));
                 items.add(player.getInventory().getItemInMainHand());
                 for (ItemStack item : items) {
-                    if (item == null || !EnchantmentUtil.isEnchanted(item)) {
+                    if (!EnchantmentUtil.isEnchanted(item)) {
                         continue;
                     }
 
-                    for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
+                    EnchantmentHolder holder = EnchantmentUtil.getEnchantmentHolder(item);
+
+                    if (holder == null) {
+                        return;
+                    }
+
+                    for (ActiveEnchantment enchantment : holder.getEnchantments()) {
                         //REMOVE DEPRECATED SHIT LATER
                         if (enchantment.getEnchantment().getTrigger() != UniversalEnchantmentTrigger.EVERY_SECOND&&
                                 enchantment.getEnchantment().getTrigger() != ArmorEnchantmentTrigger.EVERY_SECOND &&
@@ -137,11 +143,13 @@ public final class EnchantmentManager implements Listener {
             return;
         }
 
-        for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
-            if (!(enchantment.getEnchantment() instanceof ToolEnchantment)) {
-                continue;
-            }
+        EnchantmentHolder holder = EnchantmentUtil.getEnchantmentHolder(item);
 
+        if (holder == null) {
+            return;
+        }
+
+        for (ActiveEnchantment enchantment : holder.getEnchantments()) {
             if (enchantment.getEnchantment().getTrigger() != ItemEnchantmentTrigger.ON_BLOCK_BREAK) {
                 continue;
             }
@@ -170,7 +178,13 @@ public final class EnchantmentManager implements Listener {
                 continue;
             }
 
-            for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
+            EnchantmentHolder holder = EnchantmentUtil.getEnchantmentHolder(item);
+
+            if (holder == null) {
+                return;
+            }
+
+            for (ActiveEnchantment enchantment : holder.getEnchantments()) {
                 EnchantmentTrigger trigger = enchantment.getEnchantment().getTrigger();
 
                 if (trigger != UniversalEnchantmentTrigger.ON_DURABILITY_LOSS) {
@@ -190,10 +204,14 @@ public final class EnchantmentManager implements Listener {
             return;
         }
 
-        for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
-            EnchantmentTrigger trigger = enchantment.getEnchantment().getTrigger();
+        EnchantmentHolder holder = EnchantmentUtil.getEnchantmentHolder(item);
 
-            if (trigger != UniversalEnchantmentTrigger.ON_ITEM_BREAK) {
+        if (holder == null) {
+            return;
+        }
+
+        for (ActiveEnchantment enchantment : holder.getEnchantments()) {
+            if (enchantment.getEnchantment().getTrigger() != UniversalEnchantmentTrigger.ON_ITEM_BREAK) {
                 continue;
             }
 
@@ -222,11 +240,13 @@ public final class EnchantmentManager implements Listener {
                 continue;
             }
 
-            for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
-                if (!(enchantment.getEnchantment() instanceof ArmorEnchantment)) {
-                    continue;
-                }
+            EnchantmentHolder holder = EnchantmentUtil.getEnchantmentHolder(item);
 
+            if (holder == null) {
+                return;
+            }
+
+            for (ActiveEnchantment enchantment : holder.getEnchantments()) {
                 if (enchantment.getEnchantment().getTrigger() != ArmorEnchantmentTrigger.ON_DAMAGE_TAKEN) {
                     continue;
                 }
@@ -253,11 +273,13 @@ public final class EnchantmentManager implements Listener {
             return;
         }
 
-        for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
-            if (!(enchantment.getEnchantment() instanceof WeaponEnchantment)) {
-                continue;
-            }
+        EnchantmentHolder holder = EnchantmentUtil.getEnchantmentHolder(item);
 
+        if (holder == null) {
+            return;
+        }
+
+        for (ActiveEnchantment enchantment : holder.getEnchantments()) {
             if (enchantment.getEnchantment().getTrigger() != ItemEnchantmentTrigger.ON_DAMAGE_DEALT) {
                 continue;
             }
@@ -281,11 +303,13 @@ public final class EnchantmentManager implements Listener {
             return;
         }
 
-        for (ActiveEnchantment enchantment : EnchantmentUtil.getEnchantmentHolder(item).getEnchantments()) {
-            if (!(enchantment.getEnchantment() instanceof WeaponEnchantment)) {
-                continue;
-            }
+        EnchantmentHolder holder = EnchantmentUtil.getEnchantmentHolder(item);
 
+        if (holder == null) {
+            return;
+        }
+
+        for (ActiveEnchantment enchantment : holder.getEnchantments()) {
             if (enchantment.getEnchantment().getTrigger() != ItemEnchantmentTrigger.ON_ENTITY_KILLED) {
                 continue;
             }

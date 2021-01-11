@@ -1,7 +1,9 @@
 package me.boboballoon.enhancedenchantments.enchantment;
 
 import me.boboballoon.enhancedenchantments.EnhancedEnchantments;
+import me.boboballoon.enhancedenchantments.manager.EnchantmentUtil;
 import me.boboballoon.enhancedenchantments.utils.TextUtil;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -9,7 +11,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * Class that represents an enchantment book
@@ -72,7 +73,7 @@ public class EnchantedBook {
 
         ItemMeta meta = item.getItemMeta();
 
-        if (!meta.getPersistentDataContainer().has(KEY, PersistentDataType.STRING)) {
+        if (!EnchantmentUtil.isEnchantedBook(item)) {
             return null;
         }
 
@@ -81,6 +82,7 @@ public class EnchantedBook {
         Enchantment enchantment = EnhancedEnchantments.getInstance().getEnchantmentManager().getEnchantment(split[0]);
 
         if (enchantment == null) {
+            item.setAmount(0); //delete book
             return null;
         }
 
@@ -110,40 +112,7 @@ public class EnchantedBook {
 
         lore.add("");
 
-        String applicable;
-        if (this.enchantment instanceof HelmetEnchantment) {
-            //helmet enchantment
-            applicable = TextUtil.format("&r&cApplicable to helmets");
-        } else if (this.enchantment instanceof ChestplateEnchantment) {
-            //chestplate enchantment
-            applicable = TextUtil.format("&r&cApplicable to chestplates");
-        } else if (this.enchantment instanceof LeggingsEnchantment) {
-            //leggings enchantment
-            applicable = TextUtil.format("&r&cApplicable to leggings");
-        } else if (this.enchantment instanceof BootsEnchantment) {
-            //boots enchantment
-            applicable = TextUtil.format("&r&cApplicable to boots");
-        } else if (this.enchantment instanceof WeaponEnchantment) {
-            //weapon enchantment
-            applicable = TextUtil.format("&r&cApplicable to weapons");
-        } else if (this.enchantment instanceof ToolEnchantment) {
-            //tool enchantment
-            applicable = TextUtil.format("&r&cApplicable to tools");
-        } else if (this.enchantment instanceof ItemEnchantment) {
-            //item enchantment
-            applicable = TextUtil.format("&r&cApplicable to items");
-        } else if (this.enchantment instanceof ArmorEnchantment) {
-            //armor enchantment
-            applicable = TextUtil.format("&r&cApplicable to armor");
-        } else if (this.enchantment instanceof UniversalEnchantment) {
-            //universal enchantment
-            applicable = TextUtil.format("&r&cApplicable to weapons/tools/armor");
-        } else {
-            applicable = TextUtil.format("&r&4Unknown enchantment type (report to server owner)");
-            EnhancedEnchantments.getInstance().getLogger().log(Level.WARNING, "The enchantment type of enchantment " + this.enchantment.getName() + " is unknown!");
-        }
-
-        lore.add(applicable);
+        lore.add(ChatColor.RED + "Applicable to " + this.enchantment.applicableTo());
 
         meta.setLore(lore);
 

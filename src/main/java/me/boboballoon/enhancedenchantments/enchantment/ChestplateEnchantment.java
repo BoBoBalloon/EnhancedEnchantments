@@ -14,6 +14,11 @@ public abstract class ChestplateEnchantment extends ArmorEnchantment {
     }
 
     @Override
+    public String applicableTo() {
+        return "chestplates";
+    }
+
+    @Override
     public boolean canEnchant(ItemStack item) {
         Material type = item.getType();
         return type == Material.LEATHER_CHESTPLATE ||

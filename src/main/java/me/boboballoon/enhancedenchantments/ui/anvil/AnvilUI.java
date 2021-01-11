@@ -71,7 +71,7 @@ public class AnvilUI implements InventoryHolder {
 
         int level = firstBook.getLevel() + 1;
 
-        if (level >= enchantment.getMaxLevel()) {
+        if (level > enchantment.getMaxLevel()) {
             return;
         }
 
