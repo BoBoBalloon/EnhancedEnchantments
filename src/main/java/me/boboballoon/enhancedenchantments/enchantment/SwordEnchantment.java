@@ -5,17 +5,14 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-/**
- * Superclass of any enchantment having to do with a AXE
- */
-public abstract class WeaponEnchantment extends ItemEnchantment {
-    public WeaponEnchantment(String name, int maxLevel, EnchantmentTier tier, ItemTrigger trigger, List<String> description) {
+public abstract class SwordEnchantment extends WeaponEnchantment {
+    public SwordEnchantment(String name, int maxLevel, EnchantmentTier tier, ItemTrigger trigger, List<String> description) {
         super(name, maxLevel, tier, trigger, description);
     }
 
     @Override
     public String applicableTo() {
-        return "weapons";
+        return "swords";
     }
 
     @Override
@@ -26,12 +23,6 @@ public abstract class WeaponEnchantment extends ItemEnchantment {
                 type == Material.GOLDEN_SWORD ||
                 type == Material.IRON_SWORD ||
                 type == Material.DIAMOND_SWORD ||
-                type == Material.NETHERITE_SWORD ||
-                type == Material.WOODEN_AXE ||
-                type == Material.STONE_AXE ||
-                type == Material.GOLDEN_AXE ||
-                type == Material.IRON_AXE ||
-                type == Material.DIAMOND_AXE ||
-                type == Material.NETHERITE_AXE;
+                type == Material.NETHERITE_SWORD;
     }
 }

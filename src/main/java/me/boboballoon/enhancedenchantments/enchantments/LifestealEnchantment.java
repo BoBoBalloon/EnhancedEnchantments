@@ -1,16 +1,13 @@
 package me.boboballoon.enhancedenchantments.enchantments;
 
-import me.boboballoon.enhancedenchantments.enchantment.ActiveEnchantment;
-import me.boboballoon.enhancedenchantments.enchantment.EnchantmentTier;
-import me.boboballoon.enhancedenchantments.enchantment.ItemEnchantmentTrigger;
-import me.boboballoon.enhancedenchantments.enchantment.WeaponEnchantment;
+import me.boboballoon.enhancedenchantments.enchantment.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.Collections;
 
-public class LifestealEnchantment extends WeaponEnchantment {
+public class LifestealEnchantment extends SwordEnchantment {
     public LifestealEnchantment() {
         super("Lifesteal", 3, EnchantmentTier.UNCOMMON, ItemEnchantmentTrigger.ON_DAMAGE_DEALT, Collections.singletonList("Steals the health of another entity"));
     }

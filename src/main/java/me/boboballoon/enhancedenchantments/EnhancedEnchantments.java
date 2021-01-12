@@ -34,7 +34,7 @@ public final class EnhancedEnchantments extends JavaPlugin {
 
         this.enchantmentManager.registerEnchantments(new AllSeeingEyeEnchant(), new AntiGravityEnchant(), new DeterminedEnchant(),
                 new DevourEnchant(), new InquiringEnchant(), new LifestealEnchantment(), new UntouchableEnchant(), new TelepathyEnchant(),
-                new UnwaveringEnchant());
+                new UnwaveringEnchant(), new PenetrationEnchant(), new BackstabEnchant());
     }
 
 

@@ -1,15 +1,12 @@
 package me.boboballoon.enhancedenchantments.enchantments;
 
-import me.boboballoon.enhancedenchantments.enchantment.ActiveEnchantment;
-import me.boboballoon.enhancedenchantments.enchantment.EnchantmentTier;
-import me.boboballoon.enhancedenchantments.enchantment.ItemEnchantmentTrigger;
-import me.boboballoon.enhancedenchantments.enchantment.WeaponEnchantment;
+import me.boboballoon.enhancedenchantments.enchantment.*;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 import java.util.Collections;
 
-public class InquiringEnchant extends WeaponEnchantment {
+public class InquiringEnchant extends SwordEnchantment {
     public InquiringEnchant() {
         super("Inquiring", 6, EnchantmentTier.LEGENDARY, ItemEnchantmentTrigger.ON_ENTITY_KILLED, Collections.singletonList("When you kill an entity there is a chance you gain extra exp"));
     }
