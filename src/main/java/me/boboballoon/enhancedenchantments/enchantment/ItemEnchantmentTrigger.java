@@ -18,12 +18,5 @@ public enum ItemEnchantmentTrigger implements ItemTrigger {
      * Will fire when the itemstack is used to kill another entity, event will return EntityDeathEvent
      * @see org.bukkit.event.entity.EntityDeathEvent
      */
-    ON_ENTITY_KILLED,
-    /**
-     * Will fire once every second, event will return PlayerNullEvent
-     * @see me.boboballoon.enhancedenchantments.events.PlayerNullEvent
-     * @deprecated replaced by {@link UniversalEnchantmentTrigger#EVERY_SECOND}
-     */
-    EVERY_SECOND
-    //REMOVE SOON
+    ON_ENTITY_KILLED
 }

@@ -9,11 +9,4 @@ public enum ArmorEnchantmentTrigger implements ArmorTrigger {
      * @see org.bukkit.event.entity.EntityDamageEvent
      */
     ON_DAMAGE_TAKEN,
-    /**
-     * Will fire once every second, event will return PlayerNullEvent
-     * @see me.boboballoon.enhancedenchantments.events.PlayerNullEvent
-     * @deprecated replaced by {@link UniversalEnchantmentTrigger#EVERY_SECOND}
-     */
-    EVERY_SECOND
-    //REMOVE SOON ^^^
 }

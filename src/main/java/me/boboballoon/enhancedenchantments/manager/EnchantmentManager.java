@@ -46,10 +46,7 @@ public final class EnchantmentManager implements Listener {
                     }
 
                     for (ActiveEnchantment enchantment : holder.getEnchantments()) {
-                        //REMOVE DEPRECATED SHIT LATER
-                        if (enchantment.getEnchantment().getTrigger() != UniversalEnchantmentTrigger.EVERY_SECOND&&
-                                enchantment.getEnchantment().getTrigger() != ArmorEnchantmentTrigger.EVERY_SECOND &&
-                                enchantment.getEnchantment().getTrigger() != ItemEnchantmentTrigger.EVERY_SECOND) {
+                        if (enchantment.getEnchantment().getTrigger() != UniversalEnchantmentTrigger.EVERY_SECOND) {
                             continue;
                         }
 
