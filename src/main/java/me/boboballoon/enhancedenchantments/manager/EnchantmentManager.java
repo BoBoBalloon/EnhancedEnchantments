@@ -12,6 +12,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
@@ -308,6 +309,34 @@ public final class EnchantmentManager implements Listener {
 
         for (ActiveEnchantment enchantment : holder.getEnchantments()) {
             if (enchantment.getEnchantment().getTrigger() != ItemEnchantmentTrigger.ON_ENTITY_KILLED) {
+                continue;
+            }
+
+            enchantment.getEnchantment().effect(event, enchantment);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerFish(PlayerFishEvent event) {
+        if (event.isCancelled()) {
+            return;
+        }
+
+        Player player = event.getPlayer();
+        ItemStack item = player.getInventory().getItemInMainHand();
+
+        if (!EnchantmentUtil.isEnchanted(item)) {
+            return;
+        }
+
+        EnchantmentHolder holder = EnchantmentUtil.getEnchantmentHolder(item);
+
+        if (holder == null) {
+            return;
+        }
+
+        for (ActiveEnchantment enchantment : holder.getEnchantments()) {
+            if (enchantment.getEnchantment().getTrigger() != FishingEnchantmentTrigger.ON_FISH) {
                 continue;
             }
 

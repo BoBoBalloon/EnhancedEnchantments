@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 /**
- * Superclass of any enchantment having to do with a AXE
+ * Superclass of any enchantment having to do with a weapon
  */
 public abstract class WeaponEnchantment extends ItemEnchantment {
     public WeaponEnchantment(String name, int maxLevel, EnchantmentTier tier, ItemTrigger trigger, List<String> description) {
