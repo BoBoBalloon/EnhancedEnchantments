@@ -9,17 +9,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 
 /**
@@ -28,8 +24,11 @@ import java.util.logging.Level;
 public final class EnchantmentManager implements Listener {
     private final Set<Enchantment> enchantments;
 
+    private final Map<UUID, EnchantmentHolder> arrows;
+
     public EnchantmentManager() {
         this.enchantments = new HashSet<>();
+        this.arrows = new HashMap<>();
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(EnhancedEnchantments.getInstance(), () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
@@ -337,6 +336,56 @@ public final class EnchantmentManager implements Listener {
 
         for (ActiveEnchantment enchantment : holder.getEnchantments()) {
             if (enchantment.getEnchantment().getTrigger() != FishingEnchantmentTrigger.ON_FISH) {
+                continue;
+            }
+
+            enchantment.getEnchantment().effect(event, enchantment);
+        }
+    }
+
+    @EventHandler
+    public void onEntityShootBow(EntityShootBowEvent event) {
+        if (event.isCancelled()) {
+            return;
+        }
+
+        if (!(event.getEntity() instanceof Player)) {
+            return;
+        }
+
+        ItemStack item = event.getBow();
+
+        if (!EnchantmentUtil.isEnchanted(item)) {
+            return;
+        }
+
+        EnchantmentHolder holder = EnchantmentUtil.getEnchantmentHolder(item);
+
+        if (holder == null) {
+            return;
+        }
+
+        for (ActiveEnchantment enchantment : holder.getEnchantments()) {
+            if (enchantment.getEnchantment().getTrigger() != BowEnchantmentTrigger.ON_ARROW_FIRED) {
+                continue;
+            }
+
+            enchantment.getEnchantment().effect(event, enchantment);
+        }
+
+        this.arrows.put(event.getProjectile().getUniqueId(), holder);
+    }
+
+    @EventHandler
+    public void onProjectileHit(ProjectileHitEvent event) {
+        if (event.getHitEntity() == null || !this.arrows.containsKey(event.getEntity().getUniqueId())) {
+            return;
+        }
+
+        EnchantmentHolder holder = this.arrows.remove(event.getEntity().getUniqueId());
+
+        for (ActiveEnchantment enchantment : holder.getEnchantments()) {
+            if (enchantment.getEnchantment().getTrigger() != BowEnchantmentTrigger.ON_ARROW_HIT) {
                 continue;
             }
 

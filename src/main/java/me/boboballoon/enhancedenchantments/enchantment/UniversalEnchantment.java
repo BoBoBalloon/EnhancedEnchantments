@@ -75,6 +75,8 @@ public abstract class UniversalEnchantment extends Enchantment {
                 type == Material.NETHERITE_CHESTPLATE ||
                 type == Material.NETHERITE_LEGGINGS ||
                 type == Material.NETHERITE_BOOTS ||
-                type == Material.FISHING_ROD;
+                type == Material.FISHING_ROD ||
+                type == Material.BOW ||
+                type == Material.CROSSBOW;
     }
 }

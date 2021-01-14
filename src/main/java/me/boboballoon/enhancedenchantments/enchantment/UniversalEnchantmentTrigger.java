@@ -3,7 +3,7 @@ package me.boboballoon.enhancedenchantments.enchantment;
 /**
  * Represents all valid enchantment triggers universally
  */
-public enum UniversalEnchantmentTrigger implements ArmorTrigger, ItemTrigger, FishingTrigger {
+public enum UniversalEnchantmentTrigger implements ArmorTrigger, ItemTrigger, FishingTrigger, BowTrigger {
     /**
      * Will fire when the itemstack is used and loses durability as a result, event will return PlayerItemDamageEvent
      * @see org.bukkit.event.player.PlayerItemDamageEvent
