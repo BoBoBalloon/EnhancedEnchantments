@@ -22,12 +22,12 @@ import java.util.logging.Level;
  * A class that deals with registering enchantments and listening for triggers
  */
 public final class EnchantmentManager implements Listener {
-    private final Set<Enchantment> enchantments;
+    private final Map<String, Enchantment> enchantments;
 
     private final Map<UUID, EnchantmentHolder> arrows;
 
     public EnchantmentManager() {
-        this.enchantments = new HashSet<>();
+        this.enchantments = new HashMap<>();
         this.arrows = new HashMap<>();
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(EnhancedEnchantments.getInstance(), () -> {
@@ -64,13 +64,12 @@ public final class EnchantmentManager implements Listener {
      */
     public void registerEnchantments(Enchantment... enchantments) {
         for (Enchantment enchantment : enchantments) {
-            for (Enchantment loadedEnchantment : this.enchantments) {
-                if (enchantment.getName().equals(loadedEnchantment.getName())) {
-                    EnhancedEnchantments.getInstance().getLogger().log(Level.SEVERE, "An enchantment with the name " + enchantment.getName() + " already exists, registering has been cancelled!");
-                    return;
-                }
+            if (this.enchantments.containsKey(enchantment.getName())) {
+                EnhancedEnchantments.getInstance().getLogger().log(Level.SEVERE, "An enchantment with the name " + enchantment.getName() + " already exists, registering has been cancelled!");
+                return;
             }
-            this.enchantments.add(enchantment);
+
+            this.enchantments.put(enchantment.getName(), enchantment);
         }
     }
 
@@ -81,7 +80,8 @@ public final class EnchantmentManager implements Listener {
      */
     public void unregisterEnchantments(Enchantment... enchantments) {
         for (Enchantment enchantment : enchantments) {
-            this.enchantments.remove(enchantment);
+            //this.enchantments.remove(enchantment);
+            this.enchantments.remove(enchantment.getName());
         }
     }
 
@@ -92,12 +92,7 @@ public final class EnchantmentManager implements Listener {
      * @return the enchantment, null if enchantment is not registered or does not exist
      */
     public Enchantment getEnchantment(String name) {
-        for (Enchantment enchantment : this.enchantments) {
-            if (enchantment.getName().equals(name)) {
-                return enchantment;
-            }
-        }
-        return null;
+        return this.enchantments.get(name);
     }
 
     /**
@@ -108,7 +103,7 @@ public final class EnchantmentManager implements Listener {
      */
     public Set<Enchantment> getEnchantments(EnchantmentTier tier) {
         Set<Enchantment> enchantments = new HashSet<>();
-        for (Enchantment enchantment : this.enchantments) {
+        for (Enchantment enchantment : this.enchantments.values()) {
             if (enchantment.getTier() == tier) {
                 enchantments.add(enchantment);
             }
@@ -122,7 +117,7 @@ public final class EnchantmentManager implements Listener {
      * @return a copy set of all active enchantments
      */
     public Set<Enchantment> getEnchantments() {
-        return new HashSet<>(this.enchantments);
+        return new HashSet<>(this.enchantments.values());
     }
 
     //Listeners
