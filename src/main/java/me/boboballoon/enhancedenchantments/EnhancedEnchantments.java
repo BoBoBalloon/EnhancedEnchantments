@@ -4,6 +4,7 @@ import me.boboballoon.enhancedenchantments.commands.GetEnchantmentCommand;
 import me.boboballoon.enhancedenchantments.commands.GetEnchantmentCompleter;
 import me.boboballoon.enhancedenchantments.enchantments.*;
 import me.boboballoon.enhancedenchantments.listeners.EnchantmentBookApplyListener;
+import me.boboballoon.enhancedenchantments.listeners.EnchantmentEffectListener;
 import me.boboballoon.enhancedenchantments.listeners.GrindstoneOpenListener;
 import me.boboballoon.enhancedenchantments.listeners.RemoveVanillaEnchantmentListener;
 import me.boboballoon.enhancedenchantments.manager.EnchantmentManager;
@@ -11,7 +12,9 @@ import me.boboballoon.enhancedenchantments.ui.UIManager;
 import me.boboballoon.enhancedenchantments.ui.anvil.AnvilListener;
 import me.boboballoon.enhancedenchantments.ui.enchantingtable.EnchantingTableListener;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EnhancedEnchantments extends JavaPlugin {
@@ -23,13 +26,14 @@ public final class EnhancedEnchantments extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        enchantmentManager = new EnchantmentManager();
-        uiManager = new UIManager();
+        this.enchantmentManager = new EnchantmentManager();
+        this.uiManager = new UIManager();
 
-        Bukkit.getPluginCommand("getenchantment").setExecutor(new GetEnchantmentCommand());
-        Bukkit.getPluginCommand("getenchantment").setTabCompleter(new GetEnchantmentCompleter());
+        PluginCommand getEnchantmentCommand = Bukkit.getPluginCommand("getenchantment");
+        getEnchantmentCommand.setExecutor(new GetEnchantmentCommand());
+        getEnchantmentCommand.setTabCompleter(new GetEnchantmentCompleter());
 
-        this.registerListeners(this.enchantmentManager, new EnchantmentBookApplyListener(), new EnchantingTableListener(),
+        this.registerListeners(new EnchantmentEffectListener(), new EnchantmentBookApplyListener(), new EnchantingTableListener(),
                 new AnvilListener(), new RemoveVanillaEnchantmentListener(), new GrindstoneOpenListener());
 
         this.enchantmentManager.registerEnchantments(new AllSeeingEyeEnchant(), new AntiGravityEnchant(), new DeterminedEnchant(),
@@ -52,8 +56,9 @@ public final class EnhancedEnchantments extends JavaPlugin {
     }
 
     private void registerListeners(Listener... listeners) {
+        PluginManager pluginManager = Bukkit.getPluginManager();
         for (Listener listener : listeners) {
-            Bukkit.getPluginManager().registerEvents(listener, this);
+            pluginManager.registerEvents(listener, this);
         }
     }
 }
