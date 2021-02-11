@@ -9,10 +9,10 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Collections;
 
-public class AntiGravityEnchant extends BootsEnchantment {
+public class AntigravityEnchant extends BootsEnchantment {
     private final PotionEffect potionEffect = new PotionEffect(PotionEffectType.SLOW_FALLING, 25, 2, false, false);
 
-    public AntiGravityEnchant() {
+    public AntigravityEnchant() {
         super("Antigravity", 1, EnchantmentTier.RARE, UniversalEnchantmentTrigger.EVERY_SECOND, Collections.singletonList("This enchantment will give you permanent slow falling"));
     }
 

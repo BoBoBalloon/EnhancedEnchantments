@@ -1,4 +1,4 @@
-package me.boboballoon.enhancedenchantments.enchantments.items.tools;
+package me.boboballoon.enhancedenchantments.enchantments.items.weapons;
 
 import me.boboballoon.enhancedenchantments.enchantment.ActiveEnchantment;
 import me.boboballoon.enhancedenchantments.enchantment.EnchantmentTier;

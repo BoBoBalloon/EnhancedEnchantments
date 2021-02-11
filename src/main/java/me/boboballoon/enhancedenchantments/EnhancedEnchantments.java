@@ -1,21 +1,19 @@
 package me.boboballoon.enhancedenchantments;
 
 import me.boboballoon.enhancedenchantments.commands.GetEnchantmentCommand;
-import me.boboballoon.enhancedenchantments.enchantments.*;
-import me.boboballoon.enhancedenchantments.enchantments.armor.boots.AntiGravityEnchant;
+import me.boboballoon.enhancedenchantments.enchantments.UnwaveringEnchant;
+import me.boboballoon.enhancedenchantments.enchantments.armor.boots.AntigravityEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.armor.chestplate.UntouchableEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.armor.helmet.AllSeeingEyeEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.items.tools.DeterminedEnchant;
-import me.boboballoon.enhancedenchantments.enchantments.items.tools.DevourEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.items.tools.TelepathyEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.items.tools.fishing.CallOfTheSeaEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.items.tools.fishing.SeasBountyEnchant;
+import me.boboballoon.enhancedenchantments.enchantments.items.weapons.DevourEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.items.weapons.PenetrationEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.items.weapons.bows.ExplosiveEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.items.weapons.bows.InfinityEnchant;
-import me.boboballoon.enhancedenchantments.enchantments.items.weapons.swords.BackstabEnchant;
-import me.boboballoon.enhancedenchantments.enchantments.items.weapons.swords.InquiringEnchant;
-import me.boboballoon.enhancedenchantments.enchantments.items.weapons.swords.LifestealEnchantment;
+import me.boboballoon.enhancedenchantments.enchantments.items.weapons.swords.*;
 import me.boboballoon.enhancedenchantments.listeners.EnchantmentBookApplyListener;
 import me.boboballoon.enhancedenchantments.listeners.EnchantmentEffectListener;
 import me.boboballoon.enhancedenchantments.listeners.GrindstoneOpenListener;
@@ -46,10 +44,10 @@ public final class EnhancedEnchantments extends JavaPlugin {
         this.registerListeners(new EnchantmentEffectListener(), new EnchantmentBookApplyListener(), new EnchantingTableListener(),
                 new AnvilListener(), new RemoveVanillaEnchantmentListener(), new GrindstoneOpenListener());
 
-        this.enchantmentManager.registerEnchantments(new AllSeeingEyeEnchant(), new AntiGravityEnchant(), new DeterminedEnchant(),
+        this.enchantmentManager.registerEnchantments(new AllSeeingEyeEnchant(), new AntigravityEnchant(), new DeterminedEnchant(),
                 new DevourEnchant(), new InquiringEnchant(), new LifestealEnchantment(), new UntouchableEnchant(), new TelepathyEnchant(),
                 new UnwaveringEnchant(), new PenetrationEnchant(), new BackstabEnchant(), new SeasBountyEnchant(), new CallOfTheSeaEnchant(),
-                new ExplosiveEnchant(), new InfinityEnchant());
+                new ExplosiveEnchant(), new InfinityEnchant(), new FireAspectEnchant(), new IceAspectEnchant());
     }
 
 
