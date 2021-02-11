@@ -1,7 +1,6 @@
 package me.boboballoon.enhancedenchantments;
 
 import me.boboballoon.enhancedenchantments.commands.GetEnchantmentCommand;
-import me.boboballoon.enhancedenchantments.commands.GetEnchantmentCompleter;
 import me.boboballoon.enhancedenchantments.enchantments.*;
 import me.boboballoon.enhancedenchantments.listeners.EnchantmentBookApplyListener;
 import me.boboballoon.enhancedenchantments.listeners.EnchantmentEffectListener;
@@ -12,7 +11,6 @@ import me.boboballoon.enhancedenchantments.ui.UIManager;
 import me.boboballoon.enhancedenchantments.ui.anvil.AnvilListener;
 import me.boboballoon.enhancedenchantments.ui.enchantingtable.EnchantingTableListener;
 import org.bukkit.Bukkit;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,9 +27,7 @@ public final class EnhancedEnchantments extends JavaPlugin {
         this.enchantmentManager = new EnchantmentManager();
         this.uiManager = new UIManager();
 
-        PluginCommand getEnchantmentCommand = Bukkit.getPluginCommand("getenchantment");
-        getEnchantmentCommand.setExecutor(new GetEnchantmentCommand());
-        getEnchantmentCommand.setTabCompleter(new GetEnchantmentCompleter());
+        new GetEnchantmentCommand();
 
         this.registerListeners(new EnchantmentEffectListener(), new EnchantmentBookApplyListener(), new EnchantingTableListener(),
                 new AnvilListener(), new RemoveVanillaEnchantmentListener(), new GrindstoneOpenListener());
