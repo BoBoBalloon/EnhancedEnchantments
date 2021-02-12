@@ -5,6 +5,7 @@ import me.boboballoon.enhancedenchantments.enchantments.UnwaveringEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.armor.boots.AntigravityEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.armor.chestplate.UntouchableEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.armor.helmet.AllSeeingEyeEnchant;
+import me.boboballoon.enhancedenchantments.enchantments.armor.leggings.AdrenalineEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.items.tools.DeterminedEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.items.tools.TelepathyEnchant;
 import me.boboballoon.enhancedenchantments.enchantments.items.tools.fishing.CallOfTheSeaEnchant;
@@ -47,7 +48,7 @@ public final class EnhancedEnchantments extends JavaPlugin {
         this.enchantmentManager.registerEnchantments(new AllSeeingEyeEnchant(), new AntigravityEnchant(), new DeterminedEnchant(),
                 new DevourEnchant(), new InquiringEnchant(), new LifestealEnchantment(), new UntouchableEnchant(), new TelepathyEnchant(),
                 new UnwaveringEnchant(), new PenetrationEnchant(), new BackstabEnchant(), new SeasBountyEnchant(), new CallOfTheSeaEnchant(),
-                new ExplosiveEnchant(), new InfinityEnchant(), new FireAspectEnchant(), new IceAspectEnchant());
+                new ExplosiveEnchant(), new InfinityEnchant(), new FireAspectEnchant(), new IceAspectEnchant(), new AdrenalineEnchant());
     }
 
 

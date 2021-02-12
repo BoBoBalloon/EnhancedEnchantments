@@ -19,6 +19,6 @@ public class AllSeeingEyeEnchant extends HelmetEnchantment {
     @Override
     public void effect(Event event, ActiveEnchantment enchantment) {
         Player player = ((PlayerNullEvent) event).getPlayer();
-        player.addPotionEffects(Collections.singleton(this.potionEffect));
+        player.addPotionEffect(this.potionEffect);
     }
 }

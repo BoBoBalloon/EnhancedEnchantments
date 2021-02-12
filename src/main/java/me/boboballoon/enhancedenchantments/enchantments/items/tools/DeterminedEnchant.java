@@ -20,6 +20,6 @@ public class DeterminedEnchant extends ToolEnchantment {
 
         PotionEffect potionEffect = new PotionEffect(PotionEffectType.FAST_DIGGING, 25, enchantment.getLevel() - 1, false, false);
 
-        player.addPotionEffects(Collections.singleton(potionEffect));
+        player.addPotionEffect(potionEffect);
     }
 }
