@@ -1,6 +1,7 @@
 package me.boboballoon.enhancedenchantments.events;
 
 import me.boboballoon.enhancedenchantments.enchantment.ActiveEnchantment;
+import me.boboballoon.enhancedenchantments.enchantment.EnchantmentHolder;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -10,12 +11,14 @@ import org.bukkit.event.HandlerList;
  */
 public class EnchantmentBookApplyEvent extends Event implements Cancellable {
     private final ActiveEnchantment enchantment;
+    private final EnchantmentHolder holder;
     private boolean cancelled;
 
     private static final HandlerList HANDLERS_LIST = new HandlerList();
 
-    public EnchantmentBookApplyEvent(ActiveEnchantment enchantment) {
+    public EnchantmentBookApplyEvent(ActiveEnchantment enchantment, EnchantmentHolder holder) {
         this.enchantment = enchantment;
+        this.holder = holder;
         this.cancelled = false;
     }
 
@@ -26,6 +29,15 @@ public class EnchantmentBookApplyEvent extends Event implements Cancellable {
      */
     public ActiveEnchantment getEnchantment() {
         return this.enchantment;
+    }
+
+    /**
+     * Returns the holder that the active enchantment is about to be added to
+     *
+     * @return the holder that the active enchantment is about to be added to
+     */
+    public EnchantmentHolder getHolder() {
+        return this.holder;
     }
 
     @Override

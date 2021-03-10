@@ -24,12 +24,7 @@ public class EnchantedBook {
 
     public EnchantedBook(Enchantment enchantment, int level) {
         this.enchantment = enchantment;
-        if (level > enchantment.getMaxLevel()) {
-            level = enchantment.getMaxLevel();
-        } else if (level < 1) {
-            level = 1;
-        }
-        this.level = level;
+        this.level = Math.min(level, enchantment.getMaxLevel());
         this.book = this.buildBook();
     }
 

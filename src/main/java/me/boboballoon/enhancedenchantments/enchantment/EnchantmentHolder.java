@@ -197,7 +197,7 @@ public class EnchantmentHolder {
                 return null;
             }
 
-            holder.addEnchantmentUnsafe(new ActiveEnchantment(base, holder, level));
+            holder.addEnchantmentUnsafe(new ActiveEnchantment(base, level));
         }
         return holder;
     }

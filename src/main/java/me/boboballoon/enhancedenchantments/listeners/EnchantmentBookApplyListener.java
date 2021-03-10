@@ -59,7 +59,7 @@ public class EnchantmentBookApplyListener implements Listener {
             return;
         }
 
-        EnchantmentBookApplyEvent applyEvent = new EnchantmentBookApplyEvent(new ActiveEnchantment(enchantedBook.getEnchantment(), holder, enchantedBook.getLevel()));
+        EnchantmentBookApplyEvent applyEvent = new EnchantmentBookApplyEvent(new ActiveEnchantment(enchantedBook.getEnchantment(), enchantedBook.getLevel()), holder);
         Bukkit.getPluginManager().callEvent(applyEvent);
 
         if (applyEvent.isCancelled()) {

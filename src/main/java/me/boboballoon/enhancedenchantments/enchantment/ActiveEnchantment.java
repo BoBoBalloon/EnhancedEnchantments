@@ -5,13 +5,17 @@ package me.boboballoon.enhancedenchantments.enchantment;
  */
 public class ActiveEnchantment {
     private final Enchantment enchantment;
-    private final EnchantmentHolder holder;
     private int level;
 
+    public ActiveEnchantment(Enchantment enchantment, int level) {
+        this.enchantment = enchantment;
+        this.setLevel(level);
+    }
+
+    @Deprecated
     public ActiveEnchantment(Enchantment enchantment, EnchantmentHolder holder, int level) {
         this.enchantment = enchantment;
-        this.holder = holder;
-        this.level = level;
+        this.setLevel(level);
     }
 
     /**
@@ -24,12 +28,13 @@ public class ActiveEnchantment {
     }
 
     /**
-     * Returns the enchantment holder currently holding this enchantment
+     * Returns null
      *
-     * @return the enchantment holder currently holding this enchantment
+     * @return null
      */
+    @Deprecated
     public EnchantmentHolder getHolder() {
-        return this.holder;
+        return null;
     }
 
     /**
