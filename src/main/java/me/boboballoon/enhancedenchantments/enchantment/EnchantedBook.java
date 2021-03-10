@@ -58,9 +58,14 @@ public class EnchantedBook {
     /**
      * Returns an enchanted book object based on an itemstack
      *
+     * @deprecated
+     * This class was a really weird place to put this method
+     * <p> Use {@link EnchantmentUtil#getEnchantedBook(ItemStack)} instead.
+     *
      * @param item the enchanted book itemstack
      * @return an enchanted book object based on said itemstack, null if itemstack is not an enchanted book
      */
+    @Deprecated
     public static EnchantedBook fromBook(ItemStack item) {
         if (!item.hasItemMeta()) {
             return null;

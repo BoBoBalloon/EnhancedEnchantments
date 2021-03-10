@@ -1,8 +1,9 @@
 package me.boboballoon.enhancedenchantments.manager;
 
+import me.boboballoon.enhancedenchantments.EnhancedEnchantments;
 import me.boboballoon.enhancedenchantments.enchantment.EnchantedBook;
+import me.boboballoon.enhancedenchantments.enchantment.Enchantment;
 import me.boboballoon.enhancedenchantments.enchantment.EnchantmentHolder;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -26,9 +27,7 @@ public class EnchantmentUtil {
             return false;
         }
 
-        ItemMeta meta = item.getItemMeta();
-
-        return meta.getPersistentDataContainer().has(EnchantmentHolder.KEY, PersistentDataType.STRING);
+        return item.getItemMeta().getPersistentDataContainer().has(EnchantmentHolder.KEY, PersistentDataType.STRING);
     }
 
     /**
@@ -42,9 +41,7 @@ public class EnchantmentUtil {
             return false;
         }
 
-        ItemMeta meta = item.getItemMeta();
-
-        return meta.getPersistentDataContainer().has(EnchantedBook.KEY, PersistentDataType.STRING);
+        return item.getItemMeta().getPersistentDataContainer().has(EnchantedBook.KEY, PersistentDataType.STRING);
     }
 
     /**
@@ -54,15 +51,15 @@ public class EnchantmentUtil {
      * @return the enchantment holder, will create a new one if nothing is present
      */
     public static EnchantmentHolder getEnchantmentHolder(ItemStack item) {
-        if (!isEnchanted(item)) {
-            return buildHolder(item);
+        if (!EnchantmentUtil.isEnchanted(item)) {
+            return EnchantmentUtil.buildHolder(item);
         }
 
         EnchantmentHolder holder = EnchantmentHolder.fromString(item.getItemMeta().getPersistentDataContainer().get(EnchantmentHolder.KEY, PersistentDataType.STRING));
 
         if (holder.isEmpty()) {
             ItemMeta meta = item.getItemMeta();
-            for (Enchantment enchantment : meta.getEnchants().keySet()) {
+            for (org.bukkit.enchantments.Enchantment enchantment : meta.getEnchants().keySet()) {
                 meta.removeEnchant(enchantment);
             }
             meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -74,6 +71,37 @@ public class EnchantmentUtil {
 
         holder.updateItem(item);
         return holder;
+    }
+
+    /**
+     * Returns an enchanted book object based on an itemstack
+     *
+     * @param item the enchanted book itemstack
+     * @return an enchanted book object based on said itemstack, null if itemstack is not an enchanted book
+     */
+    public static EnchantedBook getEnchantedBook(ItemStack item) {
+        if (!EnchantmentUtil.isEnchantedBook(item)) {
+            return null;
+        }
+
+        String[] split = item.getItemMeta().getPersistentDataContainer().get(EnchantedBook.KEY, PersistentDataType.STRING).split("-");
+
+        Enchantment enchantment = EnhancedEnchantments.getInstance().getEnchantmentManager().getEnchantment(split[0]);
+
+        if (enchantment == null) {
+            item.setAmount(0); //delete book
+            return null;
+        }
+
+        int level;
+        try {
+            level = Integer.parseInt(split[1]);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return new EnchantedBook(enchantment, level);
     }
 
     private static EnchantmentHolder buildHolder(ItemStack item) {

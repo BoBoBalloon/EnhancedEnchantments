@@ -34,13 +34,13 @@ public class AnvilUI implements InventoryHolder {
         ItemStack red = ItemUtil.background(Material.RED_STAINED_GLASS_PANE);
         ItemStack green = ItemUtil.background(Material.GREEN_STAINED_GLASS_PANE);
 
-        if (first != null && EnchantmentUtil.isEnchantedBook(first)) {
+        if (EnchantmentUtil.isEnchantedBook(first)) {
             this.inventory.setItem(21, green);
         } else {
             this.inventory.setItem(21, red);
         }
 
-        if (second != null && EnchantmentUtil.isEnchantedBook(second)) {
+        if (EnchantmentUtil.isEnchantedBook(second)) {
             this.inventory.setItem(23, green);
         } else {
             this.inventory.setItem(23, red);
@@ -52,8 +52,8 @@ public class AnvilUI implements InventoryHolder {
             return;
         }
 
-        EnchantedBook firstBook = EnchantedBook.fromBook(first);
-        EnchantedBook secondBook = EnchantedBook.fromBook(second);
+        EnchantedBook firstBook = EnchantmentUtil.getEnchantedBook(first);
+        EnchantedBook secondBook = EnchantmentUtil.getEnchantedBook(second);
 
         if (firstBook == null || secondBook == null) {
             return;

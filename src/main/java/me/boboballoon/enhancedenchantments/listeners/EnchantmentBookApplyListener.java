@@ -37,7 +37,7 @@ public class EnchantmentBookApplyListener implements Listener {
             return;
         }
 
-        EnchantedBook enchantedBook = EnchantedBook.fromBook(cursor);
+        EnchantedBook enchantedBook = EnchantmentUtil.getEnchantedBook(cursor);
 
         if (enchantedBook == null) {
             return;

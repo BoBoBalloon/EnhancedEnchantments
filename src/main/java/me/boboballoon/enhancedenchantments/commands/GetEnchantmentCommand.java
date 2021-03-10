@@ -69,18 +69,7 @@ public class GetEnchantmentCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (args.length == 1) {
-            List<String> enchantments = new ArrayList<>();
-            for (Enchantment enchantment : EnhancedEnchantments.getInstance().getEnchantmentManager().getEnchantments()) {
-                String name = enchantment.getName().replace(' ', '_');
-
-                if (name.length() < args[0].length() ||
-                        !name.substring(0, args[0].length()).equalsIgnoreCase(args[0])) {
-                    continue;
-                }
-
-                enchantments.add(name);
-            }
-            return enchantments;
+            return this.getEnchantmentNames(args[0]);
         }
 
         if (args.length == 2) {
@@ -88,5 +77,20 @@ public class GetEnchantmentCommand implements CommandExecutor, TabCompleter {
         }
 
         return null;
+    }
+
+    private List<String> getEnchantmentNames(String arg) {
+        List<String> enchantments = new ArrayList<>();
+        for (Enchantment enchantment : EnhancedEnchantments.getInstance().getEnchantmentManager().getEnchantments()) {
+            String name = enchantment.getName().replace(' ', '_');
+
+            if (name.length() < arg.length() ||
+                    !name.substring(0, arg.length()).equalsIgnoreCase(arg)) {
+                continue;
+            }
+
+            enchantments.add(name);
+        }
+        return enchantments;
     }
 }
