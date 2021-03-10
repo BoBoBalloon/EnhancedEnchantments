@@ -1,7 +1,6 @@
 package me.boboballoon.enhancedenchantments.enchantment;
 
 import me.boboballoon.enhancedenchantments.EnhancedEnchantments;
-import me.boboballoon.enhancedenchantments.manager.EnchantmentUtil;
 import me.boboballoon.enhancedenchantments.utils.TextUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -53,48 +52,6 @@ public class EnchantedBook {
      */
     public ItemStack getBook() {
         return this.book;
-    }
-
-    /**
-     * Returns an enchanted book object based on an itemstack
-     *
-     * @deprecated
-     * This class was a really weird place to put this method
-     * <p> Use {@link EnchantmentUtil#getEnchantedBook(ItemStack)} instead.
-     *
-     * @param item the enchanted book itemstack
-     * @return an enchanted book object based on said itemstack, null if itemstack is not an enchanted book
-     */
-    @Deprecated
-    public static EnchantedBook fromBook(ItemStack item) {
-        if (!item.hasItemMeta()) {
-            return null;
-        }
-
-        ItemMeta meta = item.getItemMeta();
-
-        if (!EnchantmentUtil.isEnchantedBook(item)) {
-            return null;
-        }
-
-        String[] split = meta.getPersistentDataContainer().get(KEY, PersistentDataType.STRING).split("-");
-
-        Enchantment enchantment = EnhancedEnchantments.getInstance().getEnchantmentManager().getEnchantment(split[0]);
-
-        if (enchantment == null) {
-            item.setAmount(0); //delete book
-            return null;
-        }
-
-        int level;
-        try {
-            level = Integer.parseInt(split[1]);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return new EnchantedBook(enchantment, level);
     }
 
     private ItemStack buildBook() {

@@ -12,12 +12,6 @@ public class ActiveEnchantment {
         this.setLevel(level);
     }
 
-    @Deprecated
-    public ActiveEnchantment(Enchantment enchantment, EnchantmentHolder holder, int level) {
-        this.enchantment = enchantment;
-        this.setLevel(level);
-    }
-
     /**
      * Returns the enchantment
      *
@@ -25,16 +19,6 @@ public class ActiveEnchantment {
      */
     public Enchantment getEnchantment() {
         return this.enchantment;
-    }
-
-    /**
-     * Returns null
-     *
-     * @return null
-     */
-    @Deprecated
-    public EnchantmentHolder getHolder() {
-        return null;
     }
 
     /**
