@@ -19,10 +19,10 @@ import org.bukkit.inventory.ItemStack;
 import java.util.*;
 
 public class EnchantmentEffectListener implements Listener {
-    private final Map<UUID, EnchantmentHolder> arrows;
+    private final Map<UUID, EnchantmentHolder> projectiles;
 
     public EnchantmentEffectListener() {
-        this.arrows = new HashMap<>();
+        this.projectiles = new HashMap<>();
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(EnhancedEnchantments.getInstance(), () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
@@ -297,16 +297,17 @@ public class EnchantmentEffectListener implements Listener {
             enchantment.getEnchantment().effect(event, enchantment);
         }
 
-        this.arrows.put(event.getProjectile().getUniqueId(), holder);
+        this.projectiles.put(event.getProjectile().getUniqueId(), holder);
     }
 
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent event) {
-        if (event.getHitEntity() == null || !this.arrows.containsKey(event.getEntity().getUniqueId())) {
+        UUID uuid = event.getEntity().getUniqueId();
+        EnchantmentHolder holder = this.projectiles.remove(uuid);
+
+        if (event.getHitEntity() == null || !this.projectiles.containsKey(uuid)) {
             return;
         }
-
-        EnchantmentHolder holder = this.arrows.remove(event.getEntity().getUniqueId());
 
         for (ActiveEnchantment enchantment : holder.getEnchantments()) {
             if (enchantment.getEnchantment().getTrigger() != BowEnchantmentTrigger.ON_ARROW_HIT) {

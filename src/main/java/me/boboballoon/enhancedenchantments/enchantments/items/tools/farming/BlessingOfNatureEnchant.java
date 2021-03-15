@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BlessingOfNatureEnchant extends HoeEnchantment {
-    private final List<Material> crops = Arrays.asList(Material.SWEET_BERRY_BUSH, Material.WHEAT, Material.CARROTS, Material.MELON_STEM, Material.PUMPKIN_STEM, Material.BEETROOTS, Material.POTATOES);
+    private final List<Material> crops = Arrays.asList(Material.SWEET_BERRY_BUSH, Material.WHEAT, Material.CARROTS, Material.MELON_STEM, Material.PUMPKIN_STEM, Material.BEETROOTS, Material.POTATOES, Material.NETHER_WART);
 
     public BlessingOfNatureEnchant() {
         super("Blessing Of Nature", 3, EnchantmentTier.RARE, ItemEnchantmentTrigger.ON_BLOCK_BREAK, Arrays.asList("When you break a crop, another random crop is dropped as well", "Will increase extra received by one per level of this enchantment"));
