@@ -18,10 +18,11 @@ import java.util.List;
  */
 public class GetEnchantmentCommand implements CommandExecutor, TabCompleter {
 
-    public GetEnchantmentCommand() {
+    public static void register() {
+        GetEnchantmentCommand command = new GetEnchantmentCommand();
         PluginCommand getEnchantmentCommand = Bukkit.getPluginCommand("getenchantment");
-        getEnchantmentCommand.setExecutor(this);
-        getEnchantmentCommand.setTabCompleter(this);
+        getEnchantmentCommand.setExecutor(command);
+        getEnchantmentCommand.setTabCompleter(command);
     }
 
     @Override

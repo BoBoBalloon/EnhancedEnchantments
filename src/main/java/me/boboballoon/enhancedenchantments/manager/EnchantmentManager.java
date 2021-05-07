@@ -48,6 +48,23 @@ public final class EnchantmentManager {
     }
 
     /**
+     * Unregisters enchantments that are loaded/functional in-game
+     *
+     * @param names all of the names of the enchantments you wish to unregister
+     */
+    public void unregisterEnchantments(String... names) {
+        for (String name : names) {
+            Enchantment enchantment = this.enchantments.get(name);
+
+            if (enchantment == null) {
+                continue;
+            }
+
+            this.enchantments.remove(name);
+        }
+    }
+
+    /**
      * Returns the enchantment that has the name you put
      *
      * @param name the name of the enchantment

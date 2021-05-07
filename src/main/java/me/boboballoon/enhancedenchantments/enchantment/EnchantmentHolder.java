@@ -1,6 +1,7 @@
 package me.boboballoon.enhancedenchantments.enchantment;
 
 import me.boboballoon.enhancedenchantments.EnhancedEnchantments;
+import me.boboballoon.enhancedenchantments.utils.DummyEnchantment;
 import me.boboballoon.enhancedenchantments.utils.TextUtil;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemFlag;
@@ -149,7 +150,7 @@ public class EnchantmentHolder {
         }
         meta.setLore(lore);
 
-        meta.addEnchant(org.bukkit.enchantments.Enchantment.CHANNELING, 1, true);
+        meta.addEnchant(DummyEnchantment.DUMMY_ENCHANTMENT, 1, true);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         meta.getPersistentDataContainer().set(KEY, PersistentDataType.STRING, this.toString());

@@ -22,7 +22,7 @@ public class UnwaveringEnchant extends UniversalEnchantment {
 
     private boolean cancelled(ActiveEnchantment enchantment) {
         int level = enchantment.getLevel();
-        int chance = this.random.nextInt(4);
+        int chance = this.random.nextInt(3) + 1;
 
         if (level == 1 && chance == 1) {
             return true;
