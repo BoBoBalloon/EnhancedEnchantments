@@ -195,7 +195,7 @@ public class EnchantmentHolder {
             try {
                 level = Integer.parseInt(args[1].trim());
             } catch (NumberFormatException e) {
-                return null;
+                continue;
             }
 
             holder.addEnchantmentUnsafe(new ActiveEnchantment(base, level));
