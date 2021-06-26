@@ -6,7 +6,12 @@ import me.boboballoon.enhancedenchantments.manager.EnchantmentManager;
 /**
  * Library of api methods to simplify getting internal information
  */
-public class EnhancedEnchantmentsAPI {
+public final class EnhancedEnchantmentsAPI {
+    /**
+     * Private constructor to prevent initialization
+     */
+    private EnhancedEnchantmentsAPI() {}
+
     /**
      * Returns the active instance of the enchantment manager
      *

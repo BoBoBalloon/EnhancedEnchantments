@@ -8,8 +8,13 @@ import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Field;
 
-public class DummyEnchantment {
+public final class DummyEnchantment {
     public static final BlankEnchantment DUMMY_ENCHANTMENT = new BlankEnchantment();
+
+    /**
+     * Private constructor to prevent initialization
+     */
+    private DummyEnchantment() {}
 
     public static void start() {
         try {
